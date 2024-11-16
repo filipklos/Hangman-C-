@@ -1,0 +1,52 @@
+jabłko;owoce
+banan;owoce
+gruszka;owoce
+pomarańcza;owoce
+truskawka;owoce
+krokodyl;zwierzęta
+słoń;zwierzęta
+tygrys;zwierzęta
+lew;zwierzęta
+papuga;zwierzęta
+telewizor;elektronika
+komputer;elektronika
+telefon;elektronika
+słuchawki;elektronika
+klawiatura;elektronika
+żyrandol;dom
+stół;dom
+krzesło;dom
+łóżko;dom
+szafa;dom
+piłka;sport
+koszykówka;sport
+siatkówka;sport
+tenis;sport
+kolarstwo;sport
+czekolada;jedzenie
+pizza;jedzenie
+spaghetti;jedzenie
+naleśniki;jedzenie
+hamburger;jedzenie
+zima;pory roku
+wiosna;pory roku
+lato;pory roku
+jesień;pory roku
+burza;pogoda
+deszcz;pogoda
+śnieg;pogoda
+słońce;pogoda
+wiatr;pogoda
+samochód;pojazdy
+rower;pojazdy
+motocykl;pojazdy
+autobus;pojazdy
+pociąg;pojazdy
+warszawa;miasta
+kraków;miasta
+gdańsk;miasta
+wrocław;miasta
+poznań;miasta
+hamburg;miasta
+berlin;miasta
+tablica;szkoła

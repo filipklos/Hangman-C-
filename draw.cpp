@@ -1,3 +1,4 @@
+//plik rysujący odpowiedni poziom szubienicy od 0 do 6, plik jest uruchamiany orzez funkcję game wewnątrz pliku game.cpp
 #include <iostream>
 
 using namespace std;

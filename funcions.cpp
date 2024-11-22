@@ -6,10 +6,26 @@
 #include <vector>
 #include <codecvt>
 #include <cwctype>
-
+#include <thread>
+#include <chrono>
 
 
 using namespace std;
+
+// jeśli system operacyjny to windows to dołączamy <windows.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+//zmiana koloru konsoli na zielony (z uwględnieniem róznic w sytemach operacyjnych)
+void setConsoleGreen() {
+#ifdef _WIN32
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN); // Windows
+#else
+    cout << "\033[38;5;22m"; // MacOS i Linux
+#endif
+}
 
 //funkcja czyszcząca konsolę, funkcja storzona tak aby program mógł zadziałać na róznych systemach operacyjnych
 void clearConsole()
@@ -21,28 +37,49 @@ void clearConsole()
 #endif
 }
 
+//funcja wyświetlająca string znak po znaku z zachowaniem odstępu czasowego
+void slowCout(const string& text)
+{
+    for (char i: text)
+    {
+        this_thread::sleep_for(chrono::milliseconds(10));
+        cout << i;
+        cout.flush(); // Wymusza natychmiastowe wyświetlenie
+    }
+}
+
+
 //funkcja wyświetlająca informacje pojawiające się na początku uruchomineia programu
 void infoStart()
 {
-    cout << "Widaj w grze wisielec" << endl;
-    cout << "Wybierz odpowiedni tryb gry wpisując z klawiatury odpowiednią komendę" << endl;
-    cout << "Jeśli grasz w pojedynkę zmierzysz się z hasłem wygenerowanym przez komputer i postarasz się na nie odpowiedzieć w tym celu wpisz: 1" << endl;
-    cout << "Jeśli grasz z drugą osobą to 1 osoba poda hasło a drgupa postara się je odgadnąć. Aby wejść w ten tryb gry wpisz: 2" << endl;
-    cout << "Jeśli chcesz dodać nowe hasło do bazy danych wybierz: 3" << endl;
+    slowCout("Widaj w grze wisielec");
+    cout << endl;
+    slowCout("Wybierz odpowiedni tryb gry wpisując z klawiatury odpowiednią komendę");
+    cout << endl;
+    slowCout("Jeśli grasz w pojedynkę zmierzysz się z hasłem wygenerowanym przez komputer i postarasz się na nie odpowiedzieć w tym celu wpisz: 1");
+    cout << endl;
+    slowCout("Jeśli grasz z drugą osobą to 1 osoba poda hasło a drgupa postara się je odgadnąć. Aby wejść w ten tryb gry wpisz: 2");
+    cout << endl;
+    slowCout("Jeśli chcesz dodać nowe hasło do bazy danych wybierz: 3");
+    cout << endl;
 }
 
 //funkcja wyświetlająca informacje podczas włączeniu trybu drugiego gry
 void infoMode2()
 {
-    cout << "W tym trybie samodzielnie utworzysz utworzysz własne hasło oraz własną kategorię." << endl;
-    cout << "Następnie drugi gracz będzie musiał odgadnąć twoje hasło" << endl;
+    slowCout("W tym trybie samodzielnie utworzysz utworzysz własne hasło oraz własną kategorię." );
+    cout << endl;
+    slowCout("Następnie drugi gracz będzie musiał odgadnąć twoje hasło");
+    cout << endl;
 }
 
 //funkcja wyświetlająca informacje podczas włączeniu trybu trzeciego gry
 void infoMode3()
 {
-    cout << "W tym trybie samodzielnie utworzysz utworzysz własne hasło oraz własną kategorię." << endl;
-    cout << "Następnie zostaną one dodane do bazy danych" << endl;
+    slowCout("W tym trybie samodzielnie utworzysz utworzysz własne hasło oraz własną kategorię.");
+    cout << endl;
+    slowCout("Następnie zostaną one dodane do bazy danych");
+    cout << endl;
 }
 
 //funkcja zmieniająca litery na znaki '_' w haśle składającym się z liter oraz spacji

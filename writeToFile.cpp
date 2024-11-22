@@ -19,7 +19,8 @@ void writeToFile(const wstring& word, const string category)
         //jeżeli udało się otworzyć plik to nasze wartości są do niedo dopisywane
         words << wordString << ";" << category << endl;
         words.close();
-        cout << "Dane zostały zapisane do pliku." << endl;
+        slowCout("Dane zostały zapisane do pliku.");
+        cout << endl;
     } else {
         //pliku nie udało się otworzyć wartości nie zostały zapisane
         cerr << "Nie udało się otworzyć pliku!" << endl;

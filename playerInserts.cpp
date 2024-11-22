@@ -28,12 +28,15 @@ void playerInserts(wstring& word, string& category, const int& mode)
             clearConsole();
             infoMode3();
         }
-        cout << "Hasło oraz kategoria mogą składać się wyłącznie z liter polskiego alfabetu" << endl;
+        slowCout("Hasło oraz kategoria mogą składać się wyłącznie z liter polskiego alfabetu");
+        cout << endl;
 
         //sprawdzenie czy gracz podał dane które okazały się nie prawdziwe (dla drugiego i każdego kolejnego uruchomienia pętli), dla pierwszego uruchomienia pętli wykonanie instrukcji else
         if (error)
         {
-            cout << endl << "W podanych wyrazach znalazły się nieprawidłowe dane, spróbuj ponownie" << endl << endl;
+            cout << endl;
+            slowCout("W podanych wyrazach znalazły się nieprawidłowe dane, spróbuj ponownie");
+            cout << endl << endl;
         } else
         {
             //Czyszczenie strumienia wejściowego przed odczytem (tylko za 1 uruchomieniem)
@@ -41,9 +44,9 @@ void playerInserts(wstring& word, string& category, const int& mode)
         }
 
         //gracz podaje hasło oraz jego kategorię
-        cout << "Podaj proszę kategorię jakiej jakiej ma dotyczyć hasło: ";
+        slowCout("Podaj proszę kategorię jakiej jakiej ma dotyczyć hasło: ");
         getline(cin, category);
-        cout << "Proszę podaj hasło: ";
+        slowCout("Proszę podaj hasło: ");
         getline(cin, wordTmp);
 
         //użycie funkcji z pliku funcions.cpp do zmiany stringa na wstring

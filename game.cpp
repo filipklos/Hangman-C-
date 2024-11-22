@@ -32,19 +32,31 @@ void game(const wstring& word, const string& category)
         {
             //czyszczenie konsoli i wyświetlanie kategori oraz zasłoniętego hasła z odsłoniętymi tylko zgadniętymi literami
             clearConsole();
-            cout << "Kategoria: " << category << endl;
-            wcout << L"Hasło: " << password << endl;
+
+            slowCout("Kategoria: ");
+            slowCout(category);
+            cout<< endl;
+
+            slowCout("Hasło: ");
+            slowCout(wstringToString(password));
+            cout << endl;
             
             //użycie włanej funkcji która w zależności od poziomu gry rysuje szubienice
             draw(level);
 
             //wyświetlanie liter które gracz już podał a okazały się niepoprawne
-            cout << "litery niepoprawne: ";
-            for (wchar_t i : incorrectAns) wcout << i << L' ';
+            wstring incorrects;
+            slowCout("litery niepoprawne: ");
+            for (wchar_t i : incorrectAns)
+            {
+                incorrects += i;
+                incorrects += L' ';
+            }
+            slowCout(wstringToString(incorrects));
             cout << endl;
 
             //gracz podaje nową literę
-            cout << "Podaj literę: ";
+            slowCout("Podaj literę: ");
             cin >> letter;
             letterWchar = stringToWstring(letter)[0]; //własna funkcja z pliku funcions.cpp zmieniająca string na wstring
 
@@ -74,16 +86,21 @@ void game(const wstring& word, const string& category)
     if (level == 6)
     {
         //gracz przegrał
-        cout << "Przegrana!" << endl;
+        slowCout("Przegrana!");
+        cout << endl;
         draw(level);
-        cout << "Poprawne hasło to: ";
-        wcout << word << endl;
+        slowCout("Poprawne hasło to: ");
+        slowCout(wstringToString(word));
+        cout << endl;
     } else
     {
         //gracz wygrał
-        cout << "Gratulacje Udało ci się wygrać!" << endl;
+        slowCout("Gratulacje Udało ci się wygrać!");
+        cout << endl;
         draw(level);
+        slowCout("odgadłeś hasło: ");
         cout << "odgadłeś hasło: ";
-        wcout << word << endl;
+        slowCout(wstringToString(word));
+        cout << endl;
     }
 }

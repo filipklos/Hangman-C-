@@ -10,8 +10,9 @@ int main()
     wstring word;
     string category;
 
-    //konsola się czyści i wyświetla informacje dla gracza
+    //konsola się czyści, zmienia kolor tekstu na zielony i wyświetla informacje dla gracza
     clearConsole();
+    setConsoleGreen();
     infoStart();
 
     //gracz wybiera tryb gry

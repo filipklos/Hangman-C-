@@ -15,7 +15,9 @@ void writeToFile(const wstring& word, const string category);
 void playerInserts(wstring& word, string& category, const int& mode);
 
 //funkcje z pliku funcions.cpp
+void setConsoleGreen();
 void clearConsole();
+void slowCout(const string& text);
 void infoStart();
 void infoMode2();
 void infoMode3();

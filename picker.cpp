@@ -1,4 +1,4 @@
-//plik ten składa się z 1 funkcji która zostanie uruchomiona przez plik main.cpp
+// Plik ten składa się z jednej funkcji, która zostanie uruchomiona przez plik main.cpp
 #include <iostream>
 #include "heading.h"
 #include <fstream>
@@ -8,65 +8,67 @@
 
 using namespace std;
 
-//funkcja ta otwiera plik i wybiera z bazy danych (plik words.txt) losowe słowo oraz kategorie jaką to słowo ma przypisaną, funkcja.
-//funkcja ta modyfikuje tylko zmienne które pochodzą z pliku main.cpp a nie zwraca własnych 
+// Funkcja ta otwiera plik i wybiera z bazy danych (plik words.txt) losowe słowo oraz kategorię,
+// którą to słowo ma przypisaną. Funkcja ta modyfikuje tylko zmienne, które pochodzą z pliku main.cpp
+// a nie zwraca własnych wartości.
 void picker(wstring &Pickedword, string &Pickedcategory)
 {
-    // tworzą się wszystkie zmienne lokalne potrzebne do działania funkcji
+    // Tworzenie zmiennych lokalnych potrzebnych do działania funkcji
     string line, word, category;
     bool secondWord = false;
-    int lineCount = 0;
     vector<pair<string, string>> wordsList;
-    
-    //otwarcie pliku do odczytu
+
+    // Otwarcie pliku do odczytu
     ifstream words("words.txt");
 
     if (words.is_open())
     {
-        //plik został otwarty i teraz pętla while będzie po kolei wczytywać dane z pliku (hasła i kategorie)
-        //dane pobrane z pliku będą zapisywane w wektorze
-        while (getline (words, line))
+        // Plik został otwarty i teraz pętla while będzie po kolei wczytywać dane z pliku (hasła i kategorie)
+        // Dane pobrane z pliku będą zapisywane w wektorze
+        while (getline(words, line))
         {
             secondWord = false;
             word = "";
             category = "";
             for (char letter : line)
             {
-                //w pliku hasło od kategori rozdzielone jest znakiem ';' dlatego dzięki temu program będzie wstanie bezproblemowo rozdzielić te słowa od siebie
+                // W pliku hasło od kategorii rozdzielone jest znakiem ';' dlatego program będzie w stanie
+                // rozdzielić te elementy i przypisać je do odpowiednich zmiennych
                 if (letter == ';')
                 {
                     secondWord = true;
-                } else
+                }
+                else
                 {
                     if (secondWord)
                     {
                         category += letter;
-                    } else
+                    }
+                    else
                     {
                         word += letter;
                     }
-                    }
+                }
             }
-            //dodawanie słów z danego wiersza do wektora oraz dodanie 1 do lineCount dzięki czemu program będzie wiedzieć ile plik ma wierszy
+            // Dodawanie słów z danego wiersza do wektora oraz zwiększanie lineCount,
+            // aby program wiedział, ile linii znajduje się w pliku
             wordsList.push_back({word, category});
-            lineCount ++;
         }
         words.close();
 
-        //generowanie liczby losowej z zakresu od [0 do liczby linii w pliku - 1]
+        // Generowanie liczby losowej z zakresu od 0 do liczby linii w pliku - 1
         mt19937 gen(time(nullptr));
-
-        uniform_int_distribution <int> dist(0, lineCount - 1);
-
+        uniform_int_distribution<int> dist(0, wordsList.size() - 1);
         int randomNumber = dist(gen);
 
-        // Wygenerowana liczba losowa sprawia, że zostają wybrane słowa z losowego wiersza z pliku, po czym funkcja kończy działanie.
-        // Wartości te będą mogły zostać użyte dalej przez plik main.cpp.
+        // Wygenerowana liczba losowa wybiera słowa z losowego wiersza w pliku,
+        // po czym funkcja kończy działanie. Wartości te będą mogły zostać użyte w main.cpp.
         Pickedword = stringToWstring(wordsList[randomNumber].first);
         Pickedcategory = wordsList[randomNumber].second;
-    } else
+    }
+    else
     {
-        //otwarcie pliku się niepowiodło
+        // Otwarcie pliku się nie powiodło
         cerr << "Błąd odczytu z pliku" << endl;
     }
 }

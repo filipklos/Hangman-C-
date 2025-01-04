@@ -50,3 +50,5 @@ poznań;miasta
 hamburg;miasta
 berlin;miasta
 tablica;szkoła
+malina;owoc
+londyn;miasta

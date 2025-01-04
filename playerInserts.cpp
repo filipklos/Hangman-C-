@@ -1,67 +1,72 @@
-//plik używany przez main.cpp służy do tego by gracz mógł podać swoje własne hasło oraz kategorię
+// Plik używany przez main.cpp, służy do tego, by gracz mógł podać swoje własne hasło oraz kategorię
 #include <iostream>
 #include <string>
 #include "heading.h"
-#include <cctype>
 
 using namespace std;
-//funkcja pobiera wskaźniki do zmiennych z pliku main.cpp i je modyfikuje
+
+// Funkcja pobiera wskaźniki do zmiennych z pliku main.cpp i je modyfikuje
 void playerInserts(wstring& word, string& category, const int& mode)
 {
-    //zmienne potrzebne do działania funkcji
+    // Zmienne potrzebne do działania funkcji
     string wordTmp;
     wstring categoryTmp;
     bool isValid = false, error = false;
 
-    //sprawdzanie czy gracz podał odpowiednie dane
+    // Sprawdzanie, czy gracz podał odpowiednie dane
     while (!isValid)
     {
-        //sprawdzanie w jakim trybie jest gracz i w zaleności od tego jest wyświetlany odpowieni komunikat
+        // W zależności od trybu gry (1 lub 2-osobowy), wyświetlany jest odpowiedni komunikat
         if (mode == 2)
         {
-            //gracz jest w trybie gry 2-osobowej
+            // Gracz jest w trybie gry 2-osobowej
             clearConsole();
             infoMode2();
-        } else
+        } 
+        else
         {
-            //gracz tylko chce zapisać nowe hasło do bazy danych
+            // Gracz chce zapisać nowe hasło do bazy danych
             clearConsole();
             infoMode3();
         }
+
+        // Informacja dla gracza
         slowCout("Hasło oraz kategoria mogą składać się wyłącznie z liter polskiego alfabetu");
         cout << endl;
 
-        //sprawdzenie czy gracz podał dane które okazały się nie prawdziwe (dla drugiego i każdego kolejnego uruchomienia pętli), dla pierwszego uruchomienia pętli wykonanie instrukcji else
+        // Jeśli wystąpił błąd walidacji przy poprzednich danych, wyświetlany jest komunikat o błędzie
         if (error)
         {
             cout << endl;
             slowCout("W podanych wyrazach znalazły się nieprawidłowe dane, spróbuj ponownie");
             cout << endl << endl;
-        } else
+        }
+        else
         {
-            //Czyszczenie strumienia wejściowego przed odczytem (tylko za 1 uruchomieniem)
+            // Czyszczenie strumienia wejściowego przed odczytem (tylko za pierwszym uruchomieniem pętli)
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
-        //gracz podaje hasło oraz jego kategorię
-        slowCout("Podaj proszę kategorię jakiej jakiej ma dotyczyć hasło: ");
+        // Gracz podaje kategorię oraz hasło
+        slowCout("Podaj proszę kategorię, jakiej ma dotyczyć hasło: ");
         getline(cin, category);
         slowCout("Proszę podaj hasło: ");
         getline(cin, wordTmp);
 
-        //użycie funkcji z pliku funcions.cpp do zmiany stringa na wstring
+        // Konwersja z string na wstring za pomocą funkcji z pliku functions.cpp
         word = stringToWstring(wordTmp);
         categoryTmp = stringToWstring(category);
 
-        //walidacja danych przy pomocy funkcji z pliku funcions.cpp
+        // Walidacja danych przy pomocy funkcji z pliku functions.cpp
         if (isWstringValid(word) && isWstringValid(categoryTmp))
         {
-            //walidacja udana funkcja kończy działanie
-            category = wstringToString(categoryTmp); //użycie funkcji z pliku funcions.cpp do zmiany wstringa na string
+            // Walidacja zakończona sukcesem, zapisujemy kategorię jako string i kończymy pętlę
+            category = wstringToString(categoryTmp); // Konwersja z wstring na string
             isValid = true;
-        } else
+        }
+        else
         {
-            //błąd walidacji pętla uruchomi się jeszcze raz
+            // Błąd walidacji, pętla uruchomi się ponownie
             error = true;
         }
     }

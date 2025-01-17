@@ -52,7 +52,7 @@ void slowCout(const string& text)
 // Funkcja wyświetlająca informacje pojawiające się na początku uruchomienia programu
 void infoStart()
 {
-    slowCout("Widaj w grze wisielec");
+    slowCout("Witaj w grze wisielec");
     cout << endl;
     slowCout("Wybierz odpowiedni tryb gry wpisując z klawiatury odpowiednią komendę");
     cout << endl;

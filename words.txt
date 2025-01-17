@@ -52,3 +52,4 @@ berlin;miasta
 tablica;szkoła
 malina;owoc
 londyn;miasta
+smoczy owoc;owoce
